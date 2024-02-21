@@ -1,26 +1,21 @@
 package Lecture5.HW;
 
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicBoolean;
 
-public class Fork extends AtomicInteger{
+
+public class Fork {
     private int number ;
-    private volatile boolean  state;
+    public volatile AtomicBoolean state;
 
     public Fork(int number) {
         this.number = number;
-        this.state = true;
+        this.state = new AtomicBoolean(true);
     }
 
     public int getNumber() {
         return number;
     }
 
-    public void setState(boolean state) {
-        this.state = state;
-    }
-    public boolean isState() {
-        return state;
-    }
 
     @Override
     public String toString() {

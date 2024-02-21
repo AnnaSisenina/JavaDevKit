@@ -21,9 +21,9 @@ public class EatingThread extends Thread{
     @Override
     public void run() {
         while (countDownLatch.getCount() > 0) {
-            if (rightFork.isState() & leftFork.isState()){
-                rightFork.setState(false);
-                leftFork.setState(false);
+            if (rightFork.state.get() & leftFork.state.get()){
+                rightFork.state.set(false);
+                leftFork.state.set(false);
                 try {
                     sage.sageEats(rightFork, leftFork);
                     Thread.sleep(1000);
@@ -32,8 +32,8 @@ public class EatingThread extends Thread{
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                rightFork.setState(true);
-                leftFork.setState(true);
+                rightFork.state.set(true);
+                leftFork.state.set(true);
 
             }
             try {
